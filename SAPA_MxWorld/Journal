@@ -1,0 +1,38 @@
+QUIERO HACER EL ÁRBOL CON TODAS LAS SAPAS MAPEADAS A SAPA INCLUYENDO LAS DE CELG
+22/11/10
+SampleSheet_SAPA71_WorldANDMezcal.csv #ESTA ES LA QUE YA HABÍA EMPEZADO
+SampleSheet_SAPA117_WorldANDNatEnvMezcal.csv #ESTA INCLUYE LAS DEL MUESTREO DE CELG
+
+scp -r D:/Dropbox/Posdoc/Sample_Sheets_SAPA/SampleSheet_SAPA117_WorldANDNatEnvMezcal.csv  javelar@dna.lavis.unam.mx:/mnt/Timina/lmorales/Public/ymez/data/metadata/
+vim /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA117_WorldANDNatEnvMezcal.csv
+:set nobomb 
+:wq
+# en nano quité tres líneas de comas al final
+
+#head  -n117 /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA117_World* > /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA117_WorldANDNatEnvMezcal.csv
+
+# quiero saber cuáles no se han mapeado contra SAPA
+cd /mnt/Timina/lmorales/Public/ymez/data/bam
+cut -d',' -f1  /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA117_WorldANDNatEnvMezcal.csv | while read line; 
+do
+    echo $line
+    ls -alt $line*SAPA*.bam
+done
+
+#las copié y pegué a mano en el excel con un nuevo archivo con las que no se han mapeado a SAPA
+scp -r D:/Dropbox/Posdoc/Sample_Sheets_SAPA/SampleSheet_SAPA47_FaltantesTomapSAPA.csv  javelar@dna.lavis.unam.mx:/mnt/Timina/lmorales/Public/ymez/data/metadata/
+vim /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA47_FaltantesTomapSAPA.csv
+:set nobomb 
+:wq
+
+
+#MAPEAR
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/03_mapping 
+module load python37/3.7.0
+python3.7 mapping2ref.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA47_FaltantesTomapSAPA.csv 
+exit
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/03_mapping
+mv javelar_SH_map2ref.sh javelar_SH_map2ref_47SAPAFaltantes.sh
+bash javelar_SH_map2ref_47SAPAFaltantes.sh
+#se fueron los 48 trabajos!
