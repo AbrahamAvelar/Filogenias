@@ -51,3 +51,26 @@ mv  javelar_SH_vcalling_genotyping.sh  javelar_SH_vcalling_genotyping_117SAPAtoS
 exit 
 cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/05_vcalling/
 bash javelar_SH_vcalling_genotyping_117SAPAtoSAPA.sh
+
+las 20 que ya se hicieron
+YMX507A09
+YMX506D01
+YMX506D02
+SRR1868670
+YMX507A10
+YMX507A11
+YMX506D04
+YMX506B04
+YMX506B07
+YMX506B08
+YMX506B09
+YMX506B10
+YMX506B11
+YMX506C01
+YMX506A08
+YMX506A12
+YMX506B01
+YMX506B03
+YMX506B06
+YMX506B12
+
