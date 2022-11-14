@@ -95,4 +95,7 @@ do
 #    echo $line
 done
 
+# voy a hacer subsets para ver si puedo hacer multi-vcfs de subsets
+
+
 
