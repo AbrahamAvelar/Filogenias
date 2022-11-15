@@ -111,6 +111,23 @@ bash javelar_SH_getSNPmatrix_117SAPA.sh
 cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/06_genotyping/st
 tail SAPA_getSNPmatrix_javelar_117SAPA.err
 
+# 221115
+# Hacer el árbol
+python3.7 vcf2phylip.py -i  /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA117/Matrix_SNPs_SAPA_from_SAPA_gt_onlySNPs_filtered_missing_10.recode.vcf
+cd /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping
+mv Matrix_SNPs_SAPA_from_SAPA* trees/SAPA117/
+cd trees
+cp RaXML_Phylogenetic_Trees_SAPA91_CONC.sge SAPA117/RaXML_Phylogenetic_Trees_SAPA117_CONC.sge
+vim RaXML_Phylogenetic_Trees_SAPA117_CONC.sge # cambiar el archivo de entrada, de salida y los st/
+qsub RaXML_Phylogenetic_Trees_SAPA117_CONC.sge
+# WARNING the alpha parameter with a value of 15.518837 estimated by RAxML for partition number 0 with the name "No Name P
+# rovided" is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate h
+# eterogeneity!
+
+
+
+
+
 
 cd /mnt/Timina/lmorales/Public/ymez/tmp/05_vcalling/
 cut -d',' -f1  /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA117_WorldANDNatEnvMezcal.csv | while read line; 
