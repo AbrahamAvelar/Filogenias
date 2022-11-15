@@ -1,0 +1,9 @@
+# Me di cuenta que el SAPA117 no tiene al montón de SpBs que serían útiles así que los agregaré.
+# voy a poner las que están en el archivo que metí al admixture. SampleSheet_SAPA93_27removed_SAPA66_forStructure.csv
+# de ahí saqué los SpB y pegué junto a SampleSheet_SAPA117_WorldANDNatEnvMezcal_2.csv 
+
+
+SampleSheet_SAPA32_SpBFaltantes_WorldANDMezcal.csv #Son las que tal vez les falte mapear a SAPA
+SampleSheet_SAPA147_WorldANDNatEnvMezcal.csv  #Son ya incluye 'todas' las SpB
+
+
