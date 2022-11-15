@@ -20,9 +20,42 @@ exit
 cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/03_mapping
 mv javelar_SH_map2ref.sh javelar_SH_map2ref_32SAPAFaltantes.sh
 bash javelar_SH_map2ref_32SAPAFaltantes.sh
-#se fueron los 33 trabajos! 11:26 
+#se fueron los 33 trabajos! 11:26 - 13:00
 
-# HACER MULTIVCF
+#04_coverage # 13:25-
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/04_coverage
+module load python37/3.7.0
+python3.7 coverage_plot.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA32_SpBFaltantes_WorldANDMezcal.csv
+exit
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/04_coverage
+mv javelar_SH_coverage_plot.sh javelar_SH_coverage_plot_32SAPAFaltantes.sh
+bash javelar_SH_coverage_plot_32SAPAFaltantes.sh
+
+
+# 05_vcalling
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/05_vcalling
+module load python37/3.7.0
+python3.7 vcalling_genotyping_isolates_GATK.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA32_SpBFaltantes_WorldANDMezcal.csv 
+cd ../../SGE/05_vcalling/
+mv  javelar_SH_vcalling_genotyping.sh  javelar_SH_vcalling_genotyping_32SAPAtoSAPA.sh
+exit 
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/05_vcalling/
+bash javelar_SH_vcalling_genotyping_32SAPAtoSAPA.sh
+
+# 05_vcalling OnlyChr
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/05_vcalling
+module load python37/3.7.0
+python3.7 SNPs_onlyChr.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA32_SpBFaltantes_WorldANDMezcal.csv --subgenome SAPA
+# tuve que ponerle ID,SRA en vez de Id,sra al sample sheet para que corriera el onlyChr y el genotyping_and_filtering.py
+exit
+mv javelar_SH_vcfOnlychr.sh javelar_SH_vcfOnlychr_32SAPA.sh
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/05_vcalling
+bash  javelar_SH_vcfOnlychr_32SAPA.sh
+
+# 06_genotyping HACER MULTIVCF
 qlogin
 cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
 module load python37/3.7.0
