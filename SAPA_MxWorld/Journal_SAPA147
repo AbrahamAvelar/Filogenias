@@ -1,9 +1,31 @@
+# 221115
 # Me di cuenta que el SAPA117 no tiene al montón de SpBs que serían útiles así que los agregaré.
 # voy a poner las que están en el archivo que metí al admixture. SampleSheet_SAPA93_27removed_SAPA66_forStructure.csv
-# de ahí saqué los SpB y pegué junto a SampleSheet_SAPA117_WorldANDNatEnvMezcal_2.csv 
+# de ahí saqué los SpB que faltaban y pegué junto a SampleSheet_SAPA117_WorldANDNatEnvMezcal_2.csv 
 
 
 SampleSheet_SAPA32_SpBFaltantes_WorldANDMezcal.csv #Son las que tal vez les falte mapear a SAPA
 SampleSheet_SAPA147_WorldANDNatEnvMezcal.csv  #Son ya incluye 'todas' las SpB
 
+scp -r D:/Dropbox/Posdoc/Sample_Sheets_SAPA/SampleSheet_SAPA32_SpBFaltantes_WorldANDMezcal.csv  javelar@dna.lavis.unam.mx:/mnt/Timina/lmorales/Public/ymez/data/metadata/
+
+vim mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA147_WorldANDNatEnvMezcal.csv # :set nobomb
+
+#MAPEAR LOS 32 QUE FALTAN
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/03_mapping 
+module load python37/3.7.0
+python3.7 mapping2ref.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA32_SpBFaltantes_WorldANDMezcal.csv
+exit
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/03_mapping
+mv javelar_SH_map2ref.sh javelar_SH_map2ref_32SAPAFaltantes.sh
+bash javelar_SH_map2ref_32SAPAFaltantes.sh
+#se fueron los 33 trabajos! 11:26 
+
+# HACER MULTIVCF
+qlogin
+cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
+module load python37/3.7.0
+python3.7 genotyping_and_filtering.py   -s mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA147_WorldANDNatEnvMezcal.csv  -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA.txt-m .1
+exit
 
