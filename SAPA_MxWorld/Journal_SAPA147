@@ -80,3 +80,27 @@ vim  get_SAPA_SNPmatrix_from_SAPA_117SAPA.sge # cambie output de .err y .out
 
 tail /mnt/Timina/lmorales/Public/ymez/bin/SGE/06_genotyping/st/SAPA_getSNPmatrix_javelar.err
 
+After filtering, kept 145 out of 145 Individuals
+Outputting Frequency Statistics...
+After filtering, kept 950450 out of a possible 950450 Sites
+
+# 22116
+# Hacer el árbol
+cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
+python3.7 vcf2phylip.py -i  /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA146/Matrix_SNPs_SAPA_from_SAPA_gt_onlySNPs_filtered_missing_10.recode.vcf
+# 9:22 - 
+cd /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping
+mv Matrix_SNPs_SAPA_from_SAPA* trees/SAPA1/
+cd trees
+cp RaXML_Phylogenetic_Trees_SAPA91_CONC.sge SAPA117/RaXML_Phylogenetic_Trees_SAPA117_CONC.sge
+vim RaXML_Phylogenetic_Trees_SAPA117_CONC.sge # cambiar el archivo de entrada, de salida y los st/
+qsub RaXML_Phylogenetic_Trees_SAPA117_CONC.sge
+# WARNING the alpha parameter with a value of 15.518837 estimated by RAxML for partition number 0 with the name "No Name P
+# rovided" is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate h
+# eterogeneity!
+
+
+# A la hora de ver el árbol vi que estaba duplicada la SRR7500195 así que termino siendo de 114 y generé SampleSheet_SAPA117_WorldANDNatEnvMezcal_2.csv que es la que puse en microrreact
+$ scp javelar@dna.lavis.unam.mx:/mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA117/RAxML_bipartitionsBranchLabels.Matrix_SNPs_SAPA_from_SAPA_gt_onlySNPs_filtered_missing_10.tree Desktop/
+
+
