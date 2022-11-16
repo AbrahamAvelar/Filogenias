@@ -78,5 +78,5 @@ mv get_SAPA_SNPmatrix_from_SAPA.sge  get_SAPA_SNPmatrix_from_SAPA_117SAPA.sge
 vim javelar_SH_getSNPmatrix_117SAPA.sh # cambié el nombre del sge que va a mandar correr
 vim  get_SAPA_SNPmatrix_from_SAPA_117SAPA.sge # cambie output de .err y .out
 
-
+tail /mnt/Timina/lmorales/Public/ymez/bin/SGE/06_genotyping/st/SAPA_getSNPmatrix_javelar.err
 
