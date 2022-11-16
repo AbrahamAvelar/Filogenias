@@ -101,6 +101,5 @@ qsub RaXML_Phylogenetic_Trees_SAPA117_CONC.sge
 
 
 # A la hora de ver el árbol vi que estaba duplicada la SRR7500195 así que termino siendo de 114 y generé SampleSheet_SAPA117_WorldANDNatEnvMezcal_2.csv que es la que puse en microrreact
-$ scp javelar@dna.lavis.unam.mx:/mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA117/RAxML_bipartitionsBranchLabels.Matrix_SNPs_SAPA_from_SAPA_gt_onlySNPs_filtered_missing_10.tree Desktop/
-
+scp javelar@dna.lavis.unam.mx:/mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SAPA146/RAxML_bipartitions.Matrix_SNPs_SAPA_from_SAPA_gt_onlySNPs_filtered_missing_10_SAPA146.tree  Desktop/
 
