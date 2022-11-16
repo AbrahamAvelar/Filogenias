@@ -22,7 +22,7 @@ mv javelar_SH_map2ref.sh javelar_SH_map2ref_32SAPAFaltantes.sh
 bash javelar_SH_map2ref_32SAPAFaltantes.sh
 #se fueron los 33 trabajos! 11:26 - 13:00
 
-#04_coverage # 13:25-
+#04_coverage # 13:25-22:30
 qlogin
 cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/04_coverage
 module load python37/3.7.0
