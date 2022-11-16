@@ -55,10 +55,28 @@ mv javelar_SH_vcfOnlychr.sh javelar_SH_vcfOnlychr_32SAPA.sh
 cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/05_vcalling
 bash  javelar_SH_vcfOnlychr_32SAPA.sh
 
+
+# como se quedó atrás el 04_coverage de la SRR7500223 avancé con lo demás y generé a nueva sample sheet sin esa usando vim
+# también le quité espacios al final a las dos columnas que decian SRR1868670
+/mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA146_WorldANDNatEnvMezcal.csv
+
+
+
 # 06_genotyping HACER MULTIVCF
 qlogin
 cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
 module load python37/3.7.0
-python3.7 genotyping_and_filtering.py   -s mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA147_WorldANDNatEnvMezcal.csv  -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA.txt-m .1
+python3.7 genotyping_and_filtering.py   -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA146_WorldANDNatEnvMezcal.csv  -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA.txt -m .1
 exit
+cd  /mnt/Timina/lmorales/Public/ymez/bin/SGE/06_genotyping/
+mv javelar_SH_getSNPmatrix.sh javelar_SH_getSNPmatrix_from_SAPA_SAPA146.sh
+bash javelar_SH_getSNPmatrix_from_SAPA_SAPA146.sh
+
+falto cambiar el nombre del getmatrix!
+mv javelar_SH_getSNPmatrix.sh javelar_SH_getSNPmatrix_117SAPA.sh
+mv get_SAPA_SNPmatrix_from_SAPA.sge  get_SAPA_SNPmatrix_from_SAPA_117SAPA.sge 
+vim javelar_SH_getSNPmatrix_117SAPA.sh # cambié el nombre del sge que va a mandar correr
+vim  get_SAPA_SNPmatrix_from_SAPA_117SAPA.sge # cambie output de .err y .out
+
+
 
