@@ -2,3 +2,14 @@
 # Las de Tmps dan muy cercanas a Mosaic Region 3 de California y de Canadá
 # La de Morelos sale cercana a 23. North American Oax
 # Las de tamaulipas con Mixed origin, panadera para ver si sale con ellas.
+
+
+
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/00_download
+vim  /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SACE37_AddEcuadorAndNAOak.csv # :set nobomb
+module load python37/3.7.0
+python3.7 download_sra.py -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SACE37_AddEcuadorAndNAOak.csv
+
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/00_download
+mv javelar_SH_download_SRA.sh javelar_SH_download_SRA_SACE37.sh
+bash javelar_SH_download_SRA_SACE37.sh
