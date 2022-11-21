@@ -16,7 +16,20 @@ bash javelar_SH_download_SRA_SACE37.sh
 
 # 02_Cleaning
 cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/02_cleaning
+module load python37/3.7.0
 python3.7 clean_fastq.py -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SACE37_AddEcuadorAndNAOak.csv
 cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/02_cleaning
 bash  javelar_SH_clean_fastq.sh
+
+# 03_Mapping
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/03_mapping
+module load python37/3.7.0
+python3.7 mapping2ref.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SACE37_AddEcuadorAndNAOak.csv
+exit
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/03_mapping
+mv javelar_SH_map2ref.sh javelar_SH_map2ref_SAPA37EcuAndNAOak.sh
+bash javelar_SH_map2ref_SAPA37EcuAndNAOak.sh
+#se fueron los 33 trabajos! 9:28 - 
+
 
