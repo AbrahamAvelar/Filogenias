@@ -32,7 +32,6 @@ mv javelar_SH_map2ref.sh javelar_SH_map2ref_SAPA37EcuAndNAOak.sh
 bash javelar_SH_map2ref_SAPA37EcuAndNAOak.sh
 #se fueron los 33 trabajos! 9:28 - 
 
-
 #04_coverage # 13:25-22:30
 qlogin
 cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/04_coverage
@@ -43,6 +42,15 @@ cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/04_coverage
 mv javelar_SH_coverage_plot.sh javelar_SH_coverage_plot_SACE37_AddEcuadorAndNAOak.sh
 bash javelar_SH_coverage_plot_SACE37_AddEcuadorAndNAOak.sh
 
+# 05_vcalling
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/05_vcalling
+module load python37/3.7.0
+python3.7 vcalling_genotyping_isolates_GATK.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SACE37_AddEcuadorAndNAOak.csv
+exit 
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/05_vcalling
+mv  javelar_SH_vcalling_genotyping.sh  javelar_SH_vcalling_genotyping_SACE37_AddEcuadorAndNAOak.sh
+bash javelar_SH_vcalling_genotyping_SACE37_AddEcuadorAndNAOak.sh
 
 
 
