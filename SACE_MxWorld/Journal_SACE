@@ -44,11 +44,11 @@ bash javelar_SH_coverage_plot_SACE37_AddEcuadorAndNAOak.sh
 # como una muestra no había terminado el 03 cuando  lancé los trabajos 04 entonces repetí el 04 ya al día siguiente
 # qsub ERR1309203_SACE.sge
 
-# 05_vcalling ~22hrs - 17:30
+# 05_vcalling ~22hrs - 17:30 SAPA :: 9:53- SACE
 qlogin
 cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/05_vcalling
 module load python37/3.7.0
-python3.7 vcalling_genotyping_isolates_GATK.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SACE37_AddEcuadorAndNAOak.csv
+python3.7 vcalling_genotyping_isolates_GATK.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SACE.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SACE37_AddEcuadorAndNAOak.csv
 exit 
 cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/05_vcalling
 mv  javelar_SH_vcalling_genotyping.sh  javelar_SH_vcalling_genotyping_SACE37_AddEcuadorAndNAOak.sh
@@ -59,7 +59,7 @@ bash javelar_SH_vcalling_genotyping_SACE37_AddEcuadorAndNAOak.sh
 qlogin
 cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/05_vcalling
 module load python37/3.7.0
-python3.7 SNPs_onlyChr.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SACE37_AddEcuadorAndNAOak.csv --subgenome SACE
+python3.7 SNPs_onlyChr.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SACE.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SACE37_AddEcuadorAndNAOak.csv --subgenome SACE
 exit
 mv javelar_SH_vcfOnlychr.sh javelar_SH_vcfOnlychr_SACE37_AddEcuadorAndNAOak.sh
 cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/05_vcalling
