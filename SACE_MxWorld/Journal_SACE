@@ -41,7 +41,8 @@ exit
 cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/04_coverage
 mv javelar_SH_coverage_plot.sh javelar_SH_coverage_plot_SACE37_AddEcuadorAndNAOak.sh
 bash javelar_SH_coverage_plot_SACE37_AddEcuadorAndNAOak.sh
-
+# como una muestra no había terminado el 03 cuando  lancé los trabajos 04 entonces repetí el 04 ya al día siguiente
+# qsub ERR1309203_SACE.sge
 
 # 05_vcalling ~22hrs - 17:30
 qlogin
