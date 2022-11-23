@@ -32,7 +32,7 @@ mv javelar_SH_map2ref.sh javelar_SH_map2ref_SACE37EcuAndNAOak.sh
 bash javelar_SH_map2ref_SACE37EcuAndNAOak.sh
 #se fueron los 37 trabajos! 17:15 - 23:35
 
-#04_coverage # 13:25-22:30
+#04_coverage # 13:25-22:30 SAPA- - - 23:44
 qlogin
 cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/04_coverage
 module load python37/3.7.0
