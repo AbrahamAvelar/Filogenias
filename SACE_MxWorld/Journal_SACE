@@ -65,7 +65,16 @@ mv javelar_SH_vcfOnlychr.sh javelar_SH_vcfOnlychr_SACE37_AddEcuadorAndNAOak.sh
 cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/05_vcalling
 bash javelar_SH_vcfOnlychr_SACE37_AddEcuadorAndNAOak.sh
 
-# como se quedó atrás el 04_coverage de la SRR7500223 avancé con lo demás y generé a nueva sample sheet sin esa usando vim
-# también le quité espacios al final a las dos columnas que decian SRR1868670
-/mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA146_WorldANDNatEnvMezcal.csv
+
+#Voy a preparar la sample sheet sin híbridos y con las de ecuador
+#mxSACE_plus_HYB_2tree_26jul2022.csv # 236total - 30JS  146SACE_YMX 20Hyb   2BRA 16CIATEJ     14CELG   7LAC   1ALPechin  
+#onlySACE2tree_26jul2022.csv         # 362total - 167JS 169YMX              18BR  7DK-CIATEJ                  1ALPechin
+#SACES2tree_21jul2022.csv            # 391total - 168JS 146SACE_YMX 20Hyb   18BR  16CIATEJ    14CELG   7LAC   1ALPechin
+#SampleSheet_SACE174_OnlyMX.csv      # 174total - 37JS+1
+#SampleSheet_SACE360_from26jul22.csv # a esta le quité el híbrido de brasil y otra que estaba repetida. a esta le voy a agregar las 37 de ecuador y etc
+
+
+#Generé  SampleSheet_SACE395_SACE360from26jul22ADDEcuadorAndNAOak.csv Para el árbol #Aquí agregué la de tina con >300 introgresiones
+#Para admixture partir de /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE304
+
 
