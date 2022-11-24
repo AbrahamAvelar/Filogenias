@@ -55,7 +55,7 @@ mv  javelar_SH_vcalling_genotyping.sh  javelar_SH_vcalling_genotyping_SACE37_Add
 bash javelar_SH_vcalling_genotyping_SACE37_AddEcuadorAndNAOak.sh
 
 
-# 05_vcalling OnlyChr 17:44-
+# 05_vcalling OnlyChr 17:44-17:55
 qlogin
 cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/05_vcalling
 module load python37/3.7.0
@@ -64,6 +64,15 @@ exit
 cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/05_vcalling
 mv javelar_SH_vcfOnlychr.sh javelar_SH_vcfOnlychr_SACE37_AddEcuadorAndNAOak.sh
 bash javelar_SH_vcfOnlychr_SACE37_AddEcuadorAndNAOak.sh
+
+#fataba agregar el onlyChr de la YMX506F12 que es la de más introgresiones. de 03(18:14) a 05 
+python3.7 mapping2ref.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SACE.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SACE1_faltantes.csv
+YMX506F12_vs_SACE.sge
+python3.7 vcalling_genotyping_isolates_GATK.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SACE.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SACE1_faltantes.csv
+YMX506F12_SACE.sge
+python3.7 SNPs_onlyChr.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SACE.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SACE1_faltantes.csv --subgenome SACE
+qsub YMX506F12_vcf_SACE_OnlychrSACE.sge
+
 
 
 #Voy a preparar la sample sheet sin híbridos y con las de ecuador
@@ -77,4 +86,21 @@ bash javelar_SH_vcfOnlychr_SACE37_AddEcuadorAndNAOak.sh
 #Generé  SampleSheet_SACE395_SACE360from26jul22ADDEcuadorAndNAOak.csv Para el árbol #Aquí agregué la de tina con >300 introgresiones
 #Para admixture partir de /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE304
 
+
+
+
+
+
+# 06_genotyping HACER MULTIVCF
+qlogin
+cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
+module load python37/3.7.0
+python3.7 genotyping_and_filtering.py   -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SACE395_SACE360from26jul22ADDEcuadorAndNAOak.csv  -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SACE.txt -m .1
+exit
+cd  /mnt/Timina/lmorales/Public/ymez/bin/SGE/06_genotyping/
+mv javelar_SH_getSNPmatrix.sh javelar_SH_getSNPmatrix_SACE395.sh
+mv get_SAPA_SNPmatrix_from_SACE.sge  get_SAPA_SNPmatrix_from_SACE_SACE395.sge 
+vim javelar_SH_getSNPmatrix_SACE395.sh # cambié el nombre del sge que va a mandar correr
+vim  get_SAPA_SNPmatrix_from_SACE_SACE395.sge # cambie output de .err y .out
+bash javelar_SH_getSNPmatrix_SACE395.sh
 
