@@ -1,0 +1,44 @@
+
+# 03_Mapping  #
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/03_mapping
+module load python37/3.7.0
+python3.7 mapping2ref.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_CONC.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA97_AllSpB_43Faltantes.csv
+exit
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/03_mapping
+mv javelar_SH_map2ref.sh javelar_SH_map2ref_SAPAFaltantesToCONC.sh
+bash  javelar_SH_map2ref_SAPAFaltantesToCONC.sh
+#se fueron los 37 trabajos! 17:15 - 23:35
+
+
+
+
+# 06_genotyping HACER MULTIVCF
+qlogin
+cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
+module load python37/3.7.0
+python3.7 genotyping_and_filtering.py -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SpBandMezcal/SampleSheet_SAPA97_AllSpB_YMX005536.csv  -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_CONC.txt -m .1
+cd  /mnt/Timina/lmorales/Public/ymez/bin/SGE/06_genotyping/
+mv javelar_SH_getSNPmatrix.sh javelar_SH_getSNPmatrix_AllSpB_YMX005536.sh
+mv get_SACE_SNPmatrix_from_SACE.sge  get_SACE_SNPmatrix_from_SACE_AllSpB_YMX005536.sge 
+exit
+cd  /mnt/Timina/lmorales/Public/ymez/bin/SGE/06_genotyping/
+vim javelar_SH_getSNPmatrix_SACE395.sh # cambié el nombre del sge que va a mandar correr
+vim  get_SACE_SNPmatrix_from_SACE_SACE395.sge # cambie output de .err y .out
+bash javelar_SH_getSNPmatrix_SACE395.sh
+
+
+SampleSheet_SAPA97_AllSpB.csv            
+
+SampleSheet_SAPA97_AllSpB_YMX004548.csv
+SampleSheet_SAPA97_AllSpB_YMX005578.csv
+SampleSheet_SAPA97_AllSpB_YMX004587.csv
+SampleSheet_SAPA97_AllSpB_YMX005598.csv
+SampleSheet_SAPA97_AllSpB_YMX004626.csv
+SampleSheet_SAPA97_AllSpB_YMX005605.csv
+SampleSheet_SAPA97_AllSpB_YMX004655.csv
+SampleSheet_SAPA97_AllSpB_YMX005623.csv
+SampleSheet_SAPA97_AllSpB_YMX004663.csv
+SampleSheet_SAPA97_AllSpB_YMX506F09.csv
+SampleSheet_SAPA97_AllSpB_YMX004702.csv
+SampleSheet_SAPA97_AllSpB_YMX507A08.csv
