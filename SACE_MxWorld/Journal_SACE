@@ -86,11 +86,6 @@ qsub YMX506F12_vcf_SACE_OnlychrSACE.sge
 #Generé  SampleSheet_SACE395_SACE360from26jul22ADDEcuadorAndNAOak.csv Para el árbol #Aquí agregué la de tina con >300 introgresiones
 #Para admixture partir de /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE304
 
-
-
-
-
-
 # 06_genotyping HACER MULTIVCF
 qlogin
 cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
@@ -99,8 +94,43 @@ python3.7 genotyping_and_filtering.py   -s /mnt/Timina/lmorales/Public/ymez/data
 exit
 cd  /mnt/Timina/lmorales/Public/ymez/bin/SGE/06_genotyping/
 mv javelar_SH_getSNPmatrix.sh javelar_SH_getSNPmatrix_SACE395.sh
-mv get_SAPA_SNPmatrix_from_SACE.sge  get_SAPA_SNPmatrix_from_SACE_SACE395.sge 
+mv get_SACE_SNPmatrix_from_SACE.sge  get_SACE_SNPmatrix_from_SACE_SACE395.sge 
 vim javelar_SH_getSNPmatrix_SACE395.sh # cambié el nombre del sge que va a mandar correr
-vim  get_SAPA_SNPmatrix_from_SACE_SACE395.sge # cambie output de .err y .out
+vim  get_SACE_SNPmatrix_from_SACE_SACE395.sge # cambie output de .err y .out
 bash javelar_SH_getSNPmatrix_SACE395.sh
+
+#After filtering, kept 395 out of 395 Individuals
+#Outputting Frequency Statistics...
+#After filtering, kept 1146370 out of a possible 1146370 Sites
+
+# Hacer árbol
+cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
+python3.7 vcf2phylip.py -i  /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE395/Matrix_SNPs_SACE_from_SACE_gt_onlySNPs_filtered_missing_10_biallelic
+
+cd /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping
+mv Matrix_SNPs_SAPA_from_SAPA* trees/SAPA1/
+
+module load vcftools/0.1.14
+vcftools --remove-indv SRR800818 --vcf Matrix_SNPs_SACE_from_SACE_gt_onlySNPs_filtered_missing_10_biallelic --out /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE395/Matrix_SNPs_SACE_from_SACE_gt_onlySNPs_filtered_missing_10_biallelic_SampleFiltered.vcf
+cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
+module load python37/3.7.0
+python3.7 vcf2phylip.py -i  /mnt/Timina/lmorales/Public/ymez/tmp/06_genotyping/trees/SACE395/Matrix_SNPs_SACE_from_SACE_gt_onlySNPs_filtered_missing_10_biallelic_SampleFiltered.vcf
+No Jaló!
+voy a tener que volver a correr la genotipada
+
+
+en vim le quité SRR800818
+tail /mnt/Timina/lmorales/Public/ymez/bin/SGE/06_genotyping/st/SACE_getSNPmatrix_javelar_SACE395_2.err
+
+
+cd trees
+cp RaXML_Phylogenetic_Trees_SAPA91_CONC.sge SAPA117/RaXML_Phylogenetic_Trees_SAPA117_CONC.sge
+vim RaXML_Phylogenetic_Trees_SAPA117_CONC.sge # cambiar el archivo de entrada, de salida y los st/
+qsub RaXML_Phylogenetic_Trees_SAPA117_CONC.sge
+# WARNING the alpha parameter with a value of 15.518837 estimated by RAxML for partition number 0 with the name "No Name P
+# rovided" is larger than 10.000000. You should do a model test and confirm that you actually need to incorporate a model of rate h
+# eterogeneity!
+
+
+
 
