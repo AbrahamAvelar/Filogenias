@@ -1,4 +1,3 @@
-
 # 03_Mapping  #
 qlogin
 cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/03_mapping
@@ -10,10 +9,38 @@ mv javelar_SH_map2ref.sh javelar_SH_map2ref_SAPAFaltantesToCONC.sh
 bash  javelar_SH_map2ref_SAPAFaltantesToCONC.sh
 #se fueron los 37 trabajos! 17:15 - 23:35
 
+# 04_Coverage
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/04_coverage
+module load python37/3.7.0
+python3.7 coverage_plot.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_CONC.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA97_AllSpB_43Faltantes.csv
+exit
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/04_coverage
+mv javelar_SH_coverage_plot.sh javelar_SH_coverage_plot_SAPA_43Faltantes.sh
+bash javelar_SH_coverage_plot_SAPA_43Faltantes.sh
+
+# 05_vcalling ~22hrs - 17:30 SAPA :: 9:53-17:43 SACE
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/05_vcalling
+module load python37/3.7.0
+python3.7 vcalling_genotyping_isolates_GATK.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_CONC.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA97_AllSpB_43Faltantes.csv
+exit 
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/05_vcalling
+mv  javelar_SH_vcalling_genotyping.sh  javelar_SH_vcalling_genotyping_CONC_SAPA_43Faltantes.sh
+bash javelar_SH_vcalling_genotyping_CONC_SAPA_43Faltantes.sh
+
+# 05_vcalling OnlyChr 17:44-17:55
+qlogin
+cd /mnt/Timina/lmorales/Public/ymez/bin/scripts/05_vcalling
+module load python37/3.7.0
+python3.7 SNPs_onlyChr.py -r /mnt/Timina/lmorales/Public/ymez/data/metadata/ref_only_SAPA.txt -s /mnt/Timina/lmorales/Public/ymez/data/metadata/SampleSheet_SAPA97_AllSpB_43Faltantes.csv --subgenome SAPA
+exit
+cd /mnt/Timina/lmorales/Public/ymez/bin/SGE/05_vcalling
+mv javelar_SH_vcfOnlychr.sh javelar_SH_vcfOnlychr_SAPAfromCONC_43Faltantes.sh
+bash javelar_SH_vcfOnlychr_SAPAfromCONC_43Faltantes.sh
 
 
-
-# 06_genotyping HACER MULTIVCF
+ 06_genotyping HACER MULTIVCF
 qlogin
 cd  /mnt/Timina/lmorales/Public/ymez/bin/scripts/06_genotyping
 module load python37/3.7.0
